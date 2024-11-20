@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmpowerHer | Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            transition: all .4s linear;
+        }
+        :root {
+            --green: #90bcc4;
+            --light-green: #f0fdfa;
+            --light-color: #777;
+            --light-white: #eee;
+            --black: #444;
+            --white: #fff;
+            --border: .2rem solid var(--black);
+            --box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, .5);
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+        html::-webkit-scrollbar {
+            width: 1rem;
+        }
+        html::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        html::-webkit-scrollbar-thumb {
+            background: #507484;
+        }
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('images/EmpowerHer background Image.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 1rem 3rem;
+            font-size: 1.8rem;
+            border: var(--border);
+            border-radius: 8px;
+            color: #507484;
+            cursor: pointer;
+            text-transform: capitalize;
+        }
+        .btn:hover {
+            background: #507484;
+            color: var(--white);
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--black);
+            box-shadow: var(--box-shadow);
+            padding: 2rem 10%;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+        .header .logo {
+            color: var(--light-white);
+            margin-right: auto;
+            font-size: 2.5rem;
+            font-weight: bolder;
+        }
+        .header .logo span {
+            color: var(--green);
+        }
+        .navbar {
+            position: relative;
+        }
+        .navbar #close-navbar {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 4rem;
+            cursor: pointer;
+            color: var(--black);
+            display: none;
+        }
+        .navbar #close-navbar:hover {
+            transform: rotate(90deg);
+        }
+        .navbar a {
+            color: var(--light-white);
+            margin-right: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            color: var(--green);
+        }
+        .icons div {
+            cursor: pointer;
+            font-size: 2.5rem;
+            color: var(--light-white);
+            margin-left: 1.5rem;
+        }
+        .icons div:hover {
+            color: var(--green);
+        }
+        #menu-btn {
+            display: none;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: var(--white);
+            box-shadow: var(--box-shadow);
+            z-index: 100;
+            flex-direction: column;
+            min-width: 150px;
+        }
+        .dropdown div {
+            color: var(--black);
+        }
+        .role-option {
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.6rem;
+            color: var(--black);
+            text-align: left;
+        }
+        .role-option:hover {
+            background: var(--light-green);
+        }
+        .account-form {
+            position: fixed;
+            top: 0;
+            right: -105%;
+            width: 45rem;
+            background: var(--white);
+            display: flex;
+            flex-flow: column;
+            gap: 2rem;
+            justify-content: center;
+            height: 100%;
+            z-index: 1200;
+            padding: 2rem;
+            text-align: center;
+            overflow-y: hidden;
+        }
+        .account-form.active {
+            right: 0;
+            box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.8);
+        }
+        .account-form #close-form {
+            position: absolute;
+            top: 1.5rem;
+            right: 2.5rem;
+            font-size: 4rem;
+            cursor: pointer;
+            color: var(--black);
+        }
+        .account-form #close-form:hover {
+            transform: rotate(90deg);
+        }
+        .account-form form {
+            border: var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            display: none;
+        }
+        .account-form form.active {
+            display: block;
+        }
+        .account-form form h3 {
+            font-size: 2.5rem;
+            padding-bottom: .5rem;
+            text-transform: uppercase;
+        }
+        .account-form form .box {
+            width: 100%;
+            padding: 1.2rem 1.4rem;
+            border: var(--border);
+            border-radius: 8px;
+            font-size: 1.6rem;
+            margin: .7rem 0;
+        }
+        .account-form form .btn {
+            width: 100%;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .buttons .btn {
+            margin: 0 .5rem;
+        }
+        .scrollable-form {
+    max-height: 80vh; /* Limit the form height */
+    overflow-y: auto; /* Enable vertical scroll */
+    padding-right: 1rem; /* Add padding for better scroll visibility */
+}
+
+
+.scrollable-form::-webkit-scrollbar {
+    width: 0.8rem;
+}
+
+
+.scrollable-form::-webkit-scrollbar-thumb {
+    background-color: #507484;
+    border-radius: 1rem;
+}
+
+
+.scrollable-form::-webkit-scrollbar-track {
+    background: transparent;
+}
+       
+
+
+
+
+.search-section {
+            margin: 4rem auto;
+            padding: 4rem;
+            text-align: center;
+            border-radius: 2rem;
+            max-width: 60rem;
+            position: relative;
+            top: -80px;
+            left: -50px;
+}
+
+
+.search-section h2 {
+    font-size: 3rem;
+    color: var(--black);
+    margin-bottom: 2rem;
+}
+
+
+.search-section h2 span {
+    color: #507484;
+}
+
+
+.search-section p {
+    font-size: 1.8rem;
+    color: var(--black);
+    margin-bottom: 2rem;
+}
+
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+.search-bar input[type="text"] {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    font-size: 1.6rem;
+    border-radius: 5rem;
+    box-shadow: var(--box-shadow);
+    margin-right: 0.5rem;
+}
+
+
+
+
+.search-bar button {
+    background-color: var(--green);
+    color: var(--white);
+    border-radius: 50%;
+    padding: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+
+.search-bar button:hover {
+    background-color: darken(var(--green), 10%);
+}
+
+
+.search-btn{
+     padding: 12px 10px;
+      font-size: 17px;
+      border: 2px solid var(--black);
+      border-radius: 40px;
+      background-color: var(--black);
+       box-shadow: var(--box-shadow);
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+}
+
+
+.search-btn:hover{
+    background-color: #507484;
+    border: 2px solid #507484;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @media(max-width:1200px) {
+            .header {
+                padding: 2rem 5%;
+            }
+        }
+        @media(max-width:900px) {
+            html {
+                font-size: 55%;
+            }
+            .header {
+                padding: 2rem;
+            }
+        }
+        @media(max-width:700px) {
+            .header {
+                #menu-btn {
+                    display: inline-block;
+                }
+                .navbar {
+                    position: fixed;
+                    top: 0;
+                    right: -105%;
+                    width: 30rem;
+                    background: var(--white);
+                    height: 100%;
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: center;
+                    z-index: 1200;
+                }
+                .navbar #close-navbar {
+                    display: block;
+                }
+                .navbar.active {
+                    box-shadow: 0 0 0 100vw rgba(0, 0, 0, .8);
+                    right: 0;
+                }
+                .navbar a {
+                    display: block;
+                    margin: 1rem 0;
+                    text-align: center;
+                    font-size: 3rem;
+                }
+            }
+        }
+        @media(max-width:450px) {
+            html {
+                font-size: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section Starts -->
+    <header class="header">
+        <a href="home.html" class="logo">Empower<span>Her</span></a>
+        <nav class="navbar">
+            <div id="close-navbar" class="fa fa-times"></div>
+            <a href="home.html">Home</a>
+            <a></a>
+            <a href="courses.html">Our Courses</a>
+            <a></a>
+            <a href="aboutus.html">About Us</a>
+            <a></a>
+        </nav>
+        <div class="icons">
+            <div id="account-btn" class="fa fa-user"></div>
+            <div id="dropdown-menu" class="dropdown">
+                <div class="role-option" data-role="user">Student Login</div>
+                <div class="role-option" data-role="trainer">Trainer Login</div>
+                <div class="role-option" data-role="admin">Admin Login</div>
+            </div>
+        </div>
+        <div id="menu-btn" class="fa fa-bars"></div>
+    </header>
+    <!-- Header Section Ends -->
+
+
+    <!-- Home Section Starts -->
+    <section class="home">
+        <div class="search-section">
+            <form action="InputTopic" method="POST">
+                <h2>What do you want to <span>learn</span> today?</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for a course, teacher or topic..." name="inputcourse" required>
+                    <input type="submit" value="Search" class="search-btn">
+                </div>
+            </form>
+        </div>
+    </section>
+   
+    <!-- Home Section Ends -->
+
+
+    <!-- Account Form Section Starts -->
+    <div class="account-form">
+        <div id="close-form" class="fa fa-times"></div>
+        <!-- Buttons to switch between login and registration forms -->
+        <div class="buttons">
+            <button class="btn login-btn">Login</button>
+            <button class="btn register-btn" id="register-btn">Register</button>
+        </div>
+
+
+        <!-- User Login Form -->
+        <form action="Student_Login_Verification" method="POST" class="login-form active">
+            <h3>Student Login Form</h3>
+            <input type="tel" class="box" name="studentcontact" placeholder="Enter your contact number">
+            <input type="password" class="box" name="studentpassword" placeholder="Enter your password">
+            <input type="submit" value="Login as User" class="btn">
+        </form>
+
+
+         <!-- Trainer Login Form -->
+         <form action="TrainerLogin_Checker" method="POST" class="trainer-form">
+            <h3>Trainer Login Form</h3>
+            <input type="text" class="box" name="trainerid" placeholder="Enter your trainer id">
+            <input type="password" class="box"  name="trainerpassword" placeholder="Enter your password">
+            <input type="submit" value="Login as Trainer" class="btn">
+        </form>
+
+
+        <!-- Admin Login Form -->
+        <form action="Admin_Login_Check" method="POST" class="admin-form">
+            <h3>Admin Login Form</h3>
+            <input type="text" class="box" name="adminid" placeholder="Enter admin id">
+            <input type="password" class="box" name="adminpassword" placeholder="Enter password">
+            <input type="submit" value="Login as Admin" class="btn">
+        </form>
+
+
+        <!-- Student Registration Form -->
+        <form action="Student_Registration_Verification" method="POST" class="registration-form user-form">
+            <h3>Student Registration Form</h3>
+            <input type="text" class="box" name="studentname" placeholder="Enter your full name">
+            <input type="number" class="box" name="studentcontact" placeholder="Enter your contact number">
+            <input type="email" class="box" name="studentmailid" placeholder="Enter your email-id">
+            <input type="password" class="box" name="studentpassword" placeholder="Create a new password">
+            <input type="password" class="box" name="studentconfirmpassword" placeholder="Confirm password">
+            <input type="submit" value="Register now" class="btn">
+        </form>
+
+
+        <!-- Trainer Registration Form -->
+    <form action="TrainerRegistration_Checker" method="POST" class="registration-form trainer-form scrollable-form">
+    <h3>Trainer Registration Form</h3>
+    <input type="text" class="box" name="trainerfirstname" placeholder="Enter first name">
+    <input type="text" class="box" name="trainermiddlename" placeholder="Enter middle name">
+    <input type="text" class="box" name="trainerlastname" placeholder="Enter last name">
+    <input type="date" class="box" name="trainerdob" placeholder="Enter your date of birth">
+    <input type="text" class="box" name="traineraddress" placeholder="Enter your address">
+    <input type="text" class="box" name="trainercity" placeholder="Enter your city">
+    <input type="text" class="box" name="trainerstate" placeholder="Enter your state">
+    <input type="tel" class="box" name="trainercontact" placeholder="Enter your contact number"  pattern="[0-9]{10}">
+    <input type="tel" class="box" name="traineradharnumber" placeholder="Enter your adhaar card number"  pattern="[0-9]{12}">
+    <input type="email" class="box" name="traineremailid" placeholder="Enter your email-id">
+    <input type="password" class="box" name="trainerpassword" placeholder="Create a new password">
+    <input type="password" class="box" name="trainerconfirmpassword" placeholder="Confirm password">
+    <input type="submit" value="Register now" class="btn">
+    </form>
+       
+    </div>
+    <!-- Account Form Section Ends -->
+
+
+
+
+    <!-- Footer section starts -->
+     <!-- Footer section ends -->
+
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>EmpowerHer | Student Registration</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <H1>Hey learner!</H1>
+        <H2>Please enter the given details: </H2>
+        <form action="Student_Registration_Verification" method="post">
+            <table>
+                <tr>
+                    <td>Enter your name: </td>
+                    <td><input type="text" name="studentname" id="studentname" required="required"></td>
+                </tr>
+                <tr>
+                    <td>Enter your contact number: </td>
+                    <td><input type="tel" name="studentcontact" id="studentcontact" placeholder="10 digit contact" required="required" pattern="[0-9]{10}"></td>
+                </tr>
+                <tr>
+                    <td>Enter your mail id: </td>
+                    <td><input type="text" name="studentmailid" id="studentmailid" required="required"></td>
+                </tr>
+                <tr>
+                    <td>Create a new password: </td>
+                    <td><input type="password" name="studentpassword" id="studentpassword" placeholder="Atleast of 8 characters" required="required"></td>
+                </tr>
+                <tr>
+                    <td>Confirm password: </td>
+                    <td><input type="password" name="studentconfirmpassword" id="studentconfirmpassword" placeholder="Same as new password" required="required"></td>
+                </tr>
+                <tr>
+                    <td><input type="Reset" value="Reset"></td>
+                    <td><input type="Submit" value="Login"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

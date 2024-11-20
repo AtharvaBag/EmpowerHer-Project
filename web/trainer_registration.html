@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>EmpowerHer | Trainer Registration Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <H1>Hello Trainer!</H1>
+        <H2>Tell me about yourself </H2>
+        <form action="TrainerRegistration_Checker" method="post">
+        <table>
+            <tr>
+                <td>Enter Your First Name: </td>
+                <td><input type="text" name="trainerfirstname" id="trainerfirstname" required="required"></td>
+            </tr>
+             <tr>
+                <td>Enter Your Middle Name: </td>
+                <td><input type="text" name="trainermiddlename" id="trainermiddlename"></td>
+            </tr>
+             <tr>
+                <td>Enter Your Last Name: </td>
+                <td><input type="text" name="trainerlastname" id="trainerlastname" required="required"></td>
+            </tr>
+            <tr>
+                <td>Enter Your Date of Birth: </td>
+                <td><input type="date" name="trainerdob" id="trainerdob" required="required"></td>
+            </tr>
+            <tr>
+                <td>Enter Your Address: </td>
+                <td><input type="text" name="traineraddress" id="traineraddress" required="required"></td>
+            </tr>
+            <tr>
+                <td>Enter Your City: </td>
+                <td><input type="text" name="trainercity" id="trainercity" required="required"></td>
+            </tr>
+            <tr>
+                <td>Enter Your State: </td>
+                <td><input type="text" name="trainerstate" id="trainerstate" required="required"></td>
+            </tr>
+            <tr>
+                <td>Enter Your Contact Number: </td>
+                <td><input type="tel" name="trainercontact" id="trainercontact" required="required" placeholder="10 digit mobile number" pattern="[0-9]{10}"></td>
+            </tr>
+            <tr>
+                <td>Enter Your Email id: </td>
+                <td><input type="text" name="traineremailid" id="traineremailid" required="required"></td>
+            </tr>
+            <tr>
+                <td>Enter Your Adhaar Card number: </td>
+                <td><input type="tel" name="traineradharnumber" id="traineradharnumber" required="required" placeholder="12 digit aadhar card number" pattern="[0-9]{12}"></td>
+            </tr>
+             <tr>
+                <td>Create a new password: </td>
+                <td><input type="password" name="trainerpassword" id="trainerpassword" placeholder="atleast of 8 characters" required="required"></td>
+            </tr>
+             <tr>
+                <td>Confirm Password: </td>
+                <td><input type="password" name="trainerconfirmpassword" id="trainerconfirmpassword" placeholder="same as new password" required="required"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="reset"></td>
+                <td><input type="submit"> </td>
+            </tr>
+            <tr>
+                <td  colspan="2">Already Registered?  <a href="trainer_login.html"><Strong>Login</Strong></a></td>
+            </tr>
+        </table>
+        </form>
+        <h3>Please remember your Trainer-Id after registration!</h3>
+    </body>
+</html>

@@ -1,0 +1,616 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dto.Trainer_DTO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+     String trainername = (String)session.getAttribute("trainername");
+     String trainerid = (String)session.getAttribute("trainerid");
+    if(trainername==null)
+    {
+        System.out.println("Registration Failed / Login Failed!");
+        response.sendRedirect("trainer_registration.html");
+        return;
+    }
+    String trainerVerificationStatus = (String)session.getAttribute("trainerVerificationStatus");
+    if(trainerVerificationStatus == null)
+    {
+        System.out.println("Verification status not found");
+        return;
+    }
+    System.out.println("Trainer Verification Status: "+trainerVerificationStatus);
+%>
+<!DOCTYPE html>
+<style>
+
+
+
+
+
+
+
+
+        * {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            transition: all .4s linear;
+        }
+        :root {
+            --green: #90bcc4;
+            --light-green: #f0fdfa;
+            --light-color: #777;
+            --light-white: #eee;
+            --black: #444;
+            --white: #fff;
+            --border: .2rem solid var(--black);
+            --box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, .5);
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: url('images/EmpowerHer background Image.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+        html::-webkit-scrollbar {
+            width: 1rem;
+        }
+        html::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        html::-webkit-scrollbar-thumb {
+            background: #507484;
+        }
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           
+            height: 100vh;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 1rem 3rem;
+            font-size: 2rem;
+            font-weight: bolder;
+            border: var(--border);
+            border-radius: 8px;
+            color: var(--black);
+            cursor: pointer;
+            text-transform: capitalize;
+            background-color: transparent;
+            height: 70px;
+            width: 300px;
+    box-shadow: var(--box-shadow);
+        }
+        .btn:hover {
+            background: #507484;
+            color: var(--white);
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--black);
+            box-shadow: var(--box-shadow);
+            padding: 2rem 10%;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+        .header .logo {
+            color: var(--light-white);
+            margin-right: auto;
+            font-size: 2.5rem;
+            font-weight: bolder;
+        }
+        .header .logo span {
+            color: var(--green);
+        }
+        .navbar {
+            position: relative;
+        }
+        .navbar #close-navbar {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 4rem;
+            cursor: pointer;
+            color: var(--black);
+            display: none;
+        }
+        .navbar #close-navbar:hover {
+            transform: rotate(90deg);
+        }
+        .navbar a {
+            color: var(--light-white);
+            margin-right: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            color: var(--green);
+        }
+        .icons div {
+            cursor: pointer;
+            font-size: 2.5rem;
+            color: var(--light-white);
+            margin-left: 1.5rem;
+        }
+        .icons div:hover {
+            color: var(--green);
+        }
+        #menu-btn {
+            display: none;
+        }
+       
+       
+        .buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .buttons .btn {
+            margin: 0 .5rem;
+        }
+        .scrollable-form {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+
+
+
+
+
+
+
+.scrollable-form::-webkit-scrollbar {
+    width: 0.8rem;
+}
+
+
+
+
+
+
+
+
+.scrollable-form::-webkit-scrollbar-thumb {
+    background-color: var(--green);
+    border-radius: 1rem;
+}
+
+
+
+
+
+
+
+
+.scrollable-form::-webkit-scrollbar-track {
+    background: transparent;
+}
+       
+
+
+
+
+.domain-heading {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--black);
+    text-align: left;
+    margin-left: 12%;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+
+
+
+
+
+
+
+h1 {
+    color: var(--black);
+    font-size: 3.8rem;
+    text-align: center;
+    padding-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+
+
+
+h2, p {
+    font-size: 2.5rem;
+    text-align: center;
+    color: var(--black);
+}
+
+
+h3{
+    font-size: 2.0rem;
+    text-align: left;
+    color: var(--black);
+    margin-left: 12%;
+}
+
+
+p {
+    margin-top: 1rem;
+    padding-bottom: 2rem;
+    color: var(--light-color);
+}
+
+
+
+
+p {
+    padding-bottom: 1rem;
+}
+
+
+
+
+span{
+    color: var(--green);
+}
+
+
+
+
+        @media(max-width:1200px) {
+            .header {
+                padding: 2rem 5%;
+            }
+        }
+        @media(max-width:900px) {
+            html {
+                font-size: 55%;
+            }
+            .header {
+                padding: 2rem;
+            }
+        }
+        @media(max-width:700px) {
+            .header {
+                #menu-btn {
+                    display: inline-block;
+                }
+                .navbar {
+                    position: fixed;
+                    top: 0;
+                    right: -105%;
+                    width: 30rem;
+                    background: var(--white);
+                    height: 100%;
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: center;
+                    z-index: 1200;
+                }
+                .navbar #close-navbar {
+                    display: block;
+                }
+                .navbar.active {
+                    box-shadow: 0 0 0 100vw rgba(0, 0, 0, .8);
+                    right: 0;
+                }
+                .navbar a {
+                    display: block;
+                    margin: 1rem 0;
+                    text-align: center;
+                    font-size: 3rem;
+                }
+            }
+        }
+        @media(max-width:450px) {
+            html {
+                font-size: 50%;
+            }
+        }
+
+
+
+
+
+
+
+
+        .course-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+
+
+
+
+
+
+
+        .course-box {
+    background-color: var(--black);
+    opacity: 0.7;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    margin: 0.5rem;
+    width: calc(32% - 1rem);
+    height: 110px;
+    padding: 1rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    transition: transform 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+        .course-box img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    margin-left: 2rem;
+    margin-right: 4rem;
+}
+
+
+
+
+
+
+
+
+        .course-box input {
+            font-size: 2rem;
+            font-weight: bolder;
+            margin-bottom: 1rem;
+            color: var(--white);
+            background: transparent;
+            border: none;
+            text-align: left;
+            margin-left: -15px;
+            padding: 0;
+        }
+
+
+
+
+
+
+
+
+        .course-box p {
+            font-size: 1.5rem;
+            color: var(--green);
+        }
+
+
+
+
+
+
+
+
+        .course-box:hover {
+            transform: translateY(-5px);
+            opacity: 0.9;
+            cursor: pointer;
+        }
+
+
+
+
+        .navbar form {
+    display: inline-block;
+    margin-right: 2rem;
+}
+
+
+.nav-btn {
+    background: none;
+    color: var(--light-white);
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: color 0.4s;
+}
+
+
+.nav-btn:hover {
+    color: var(--green);
+}
+
+
+        @media (max-width: 900px) {
+            .course-box {
+                width: calc(50% - 2rem);
+            }
+        }
+
+
+
+
+
+
+
+
+        @media (max-width: 600px) {
+            .course-box {
+                width: calc(100% - 2rem);
+            }
+        }
+    </style>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Trainer Home Page | EmpowerHer</title>
+    </head>
+    <body>
+        <header class="header">
+        <a href="Trainer_Home_Page.jsp" class="logo">Empower<span>Her</span></a>
+        <nav class="navbar">
+            <form>
+            </form>
+            <form action="TrainerCourses_Extracter" method="POST">
+                <input type="submit" value="My Courses" class="nav-btn">
+            </form>
+            <form>
+            </form>
+            <form action="TrainerProfile_Finder" method="POST">
+                <input type="submit" value="My Profile" class="nav-btn">
+            </form>
+            <form>
+            </form>
+            <form action="Trainer_Logout.jsp" method="post">
+                <input type="submit" value="Logout" class="nav-btn">
+            </form>
+        </nav>
+    </header>
+        <br>
+        <br>
+        <br>
+         <section>
+             <h2>Welcome <span style="color: #507484"><%=trainername.toUpperCase()%></span>!</h2>
+        <br>
+        <h2>Trainer Id: <span style="color: #507484"><%=trainerid%></span></h2>
+        <%
+        if(trainerVerificationStatus.equals("1"))
+        {
+            %>
+            <p style="color: #507484">Your profile is registered and verified!</p>
+            <%
+        }
+        else if(trainerVerificationStatus.equals("0"))
+        {
+            %>
+            <p style="color: grey">Your profile is registered and under verification process</p>
+            <%
+         }  
+         else if(trainerVerificationStatus.equals("2"))
+        {
+            %>
+            <p style="color: grey">Your profile is registered and under re-verification process</p>
+            <%
+         }
+         %>
+         </section>
+     
+         
+        <h3>Select a skill domain: </h3>
+         
+    <!-- Course Section Starts -->
+   
+    <section class="course-container">
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/musiclogo.jpeg" alt="music">
+            <input type="submit" class="submit-btn" value="MUSICIAN" name="skill">
+        </form>
+
+
+
+
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/dancelogo.jpeg" alt="dance">
+            <input type="submit" class="submit-btn" value="DANCING"name="skill">
+        </form>
+
+
+
+
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/yogalogo.jpeg" alt="yoga">
+            <input type="submit" class="submit-btn" value="YOGA" name="skill">
+        </form>
+
+
+
+
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/cookinglogo.jpeg" alt="cooking">
+            <input type="submit" class="submit-btn" value="COOKING" name="skill">
+        </form>
+
+
+
+
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/programminglogo.jpeg" alt="programming">
+            <input type="submit" class="submit-btn" value="PROGRAMMING" name="skill">
+        </form>
+         
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/artslogo.jpeg" alt="arts">
+            <input type="submit" class="submit-btn" value="ART & CRAFT" name="skill">
+        </form>
+
+
+
+
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/stitchinglogo.jpeg" alt="stitching">
+            <input type="submit" class="submit-btn" value="STITCHING" name="skill">
+        </form>
+
+
+
+
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/drawiglogo.jpeg" alt="drawing">
+            <input type="submit" class="submit-btn" value="DRAWING" name="skill">
+        </form>
+
+
+
+
+        <form action="TrainerCourse_Selector" method="post" class="course-box">
+            <img src="images/communicationlogo.jpeg" alt="Communication">
+            <input type="submit" class="submit-btn" value="COMMUNICATION" name="skill">
+        </form>
+       
+        <form action="TrainerCourse_Selector" method="POST">
+            <input type="submit" name="skill" id="skill" value="+ Add Your Own Skill" class="btn">
+        </form>
+    </section>
+    <!-- Course Section Ends -->
+
+
+       
+    </body>
+</html>
+
